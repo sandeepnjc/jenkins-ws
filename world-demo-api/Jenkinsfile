@@ -1,0 +1,22 @@
+pipeline
+ {
+  agent any
+  stages{
+   stage('Build Application'){
+    steps{
+    bat 'mvn clean install -DskipTests'
+    }
+   }
+
+   stage('Deploy Application to Cloudhub'){
+    steps{
+    bat 'mvn clean package deploy -DmuleDeploy -DskipTests'
+    }
+   }
+   stage('Perform Regression Test'){
+    steps{
+    bat 'C:\\Users\\sanda\\AppData\\Roaming\\npm\\newman run C:\\Users\\sanda\\Documents\\Newman\\worldtimezone.postman_collection.json --disable-unicode'
+    }
+   }
+  }
+ }
