@@ -43,6 +43,15 @@
 						<workers>1</workers>
 						<workerType>MICRO</workerType>
 					</cloudHubDeployment>
+			        <executions>
+			        	<execution>
+			            	<id>deploy</id>
+			            	<phase>deploy</phase>
+			            	<goals>
+			            		<goal>deploy</goal>
+			            	</goals>
+			      		</execution>
+			        </executions>					
 					<classifier>mule-application</classifier>
                 </configuration>
 			</plugin>
