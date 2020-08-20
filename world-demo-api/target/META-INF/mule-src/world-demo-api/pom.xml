@@ -43,6 +43,15 @@
 						<workers>1</workers>
 						<workerType>MICRO</workerType>
 					</cloudHubDeployment>
+			        <executions>
+			        	<execution>
+			            	<id>default-deploy</id>
+			            	<phase>deploy</phase>
+			            	<goals>
+			            		<goal>deploy</goal>
+			            	</goals>
+			      		</execution>
+			        </executions>					
 					<classifier>mule-application</classifier>
                 </configuration>
 			</plugin>
@@ -84,7 +93,7 @@
       			</executions>
       			<configuration>
         			<serverId>nexus</serverId>
-		        	<nexusUrl>http://localhost:8081/nexus/</nexusUrl>
+		        	<nexusUrl>http://localhost:8091/nexus/</nexusUrl>
 		        	<skipStaging>true</skipStaging>
       			</configuration>
     		</plugin>            
@@ -94,12 +103,12 @@
 		<repository>
 			<id>world-time-zone</id>
 			<name>world-time-zone</name>
-			<url>http://localhost:8081/repository/world-time-zone/</url>
+			<url>http://localhost:8091/repository/world-time-zone/</url>
 		</repository>
 		<snapshotRepository>
 			<id>world-time-zone</id>
 			<name>world-time-zone</name>
-			<url>http://localhost:8081/repository/world-time-zone/</url>
+			<url>http://localhost:8091/repository/world-time-zone/</url>
 		</snapshotRepository>
 	</distributionManagement>
 	<dependencies>
