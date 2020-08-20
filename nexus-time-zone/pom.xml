@@ -47,7 +47,18 @@
 			</plugin>
 		</plugins>
 	</build>
-
+	<distributionManagement>
+		<repository>
+			<id>world-time-zone</id>
+			<name>world-time-zone</name>
+			<url>http://localhost:8091/repository/world-time-zone/</url>
+		</repository>
+		<snapshotRepository>
+			<id>world-time-zone</id>
+			<name>world-time-zone</name>
+			<url>http://localhost:8091/repository/world-time-zone/</url>
+		</snapshotRepository>
+	</distributionManagement>
 	<dependencies>
         <dependency>
             <groupId>org.mule.connectors</groupId>
