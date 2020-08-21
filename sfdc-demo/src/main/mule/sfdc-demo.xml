@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:salesforce="http://www.mulesoft.org/schema/mule/salesforce"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/salesforce http://www.mulesoft.org/schema/mule/salesforce/current/mule-salesforce.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="1ccc0949-9507-4ff8-a95d-738b91d595ff" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<salesforce:sfdc-config name="Salesforce_Config" doc:name="Salesforce Config" doc:id="70617177-ee03-4a4f-80ef-b761b1aefbad" >
+		<salesforce:basic-connection username="sandeep.menon@njclabs.com" password="Snehaek@1981" securityToken="5y6MwMC3qeA62RhBUlS404OWr" />
+	</salesforce:sfdc-config>
+	<flow name="sfdc-demoFlow" doc:id="ebc2988d-8aaa-449d-a79a-dab72fdc160b" >
+		<http:listener doc:name="Listener" doc:id="7076a835-b4e8-4233-94ce-83e8eced1bc5" config-ref="HTTP_Listener_config" path="/sfdc" allowedMethods="POST" outputMimeType="application/json"/>
+		<ee:transform doc:name="Transform Message" doc:id="e45fc20c-8949-4339-a964-812888ad6ed5" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/java
+---
+payload map (items,index) ->
+{
+	Name:items.name,
+	BillingStreet:items.billingAddress,
+	BillingCity:items.billingCity,
+	BillingState:items.billingState,
+	BillingCountry:items.billingCountry,
+	BillingPostalCode:items.billingPostalCode
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<salesforce:create type="Account" doc:name="Create" doc:id="2f3bc563-2e44-41c0-bf22-be5ec2e046e7" config-ref="Salesforce_Config"/>
+		<ee:transform doc:name="Transform Message" doc:id="13a7fccb-470b-4d69-8aff-d5348d6abbf7" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+payload]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+	</flow>
+</mule>

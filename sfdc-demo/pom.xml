@@ -1,14 +1,13 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.mycompany</groupId>
-	<artifactId>nexus-time-zone</artifactId>
+	<artifactId>sfdc-demo</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>mule-application</packaging>
 
-	<name>nexus-time-zone</name>
+	<name>sfdc-demo</name>
 
     <properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -31,22 +30,11 @@
 				<version>${mule.maven.plugin.version}</version>
 				<extensions>true</extensions>
 				<configuration>
-					<cloudHubDeployment>
-						<uri>https://anypoint.mulesoft.com</uri>
-						<muleVersion>4.3.0</muleVersion>
-						<username>mytrain-njc</username>
-						<password>Njclabs@2020</password>
-						<applicationName>world-demo-api-skpv</applicationName>					
-						<environment>Sandbox</environment>
-						<region>us-east-2</region>
-						<objectStoreV2>true</objectStoreV2>
-						<workers>1</workers>
-						<workerType>MICRO</workerType>
-					</cloudHubDeployment>				
 				</configuration>
 			</plugin>
 		</plugins>
 	</build>
+
 	<dependencies>
         <dependency>
             <groupId>org.mule.connectors</groupId>
@@ -60,7 +48,13 @@
             <version>1.2.0</version>
             <classifier>mule-plugin</classifier>
         </dependency>
-	</dependencies>
+		<dependency>
+            <groupId>com.mulesoft.connectors</groupId>
+            <artifactId>mule-salesforce-connector</artifactId>
+            <version>10.2.0</version>
+            <classifier>mule-plugin</classifier>
+        </dependency>
+    </dependencies>
 
 	<repositories>
           <repository>
